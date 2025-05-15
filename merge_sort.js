@@ -1,21 +1,23 @@
 let arr1 = [3, 5, 2, 18, 21, 3, 7];
 
-function merge(arr) {
+function mergeSort(arr) {
+  // Divides the array until it has a single element
   if (arr.length <= 1) return arr;
 
   let mid = Math.floor(arr.length / 2);
-  let left = merge(arr.slice(0, mid));
-  let right = merge(arr.slice(mid));
+  let left = mergeSort(arr.slice(0, mid));
+  let right = mergeSort(arr.slice(mid));
 
-  return mergeSort(left, right);
+  return merge(left, right); //Passed the divided array for comparison
 }
 
-function mergeSort(left, right) {
+function merge(left, right) {
   let result = [];
   let i = 0,
     j = 0;
 
   while (i < left.length && j < right.length) {
+    //Comparison logic
     if (left[i] < right[j]) {
       result.push(left[i]);
       i++;
@@ -26,6 +28,7 @@ function mergeSort(left, right) {
   }
 
   while (i < left.length) {
+    // if any element left in the array and can't find a partner to get compared with
     result.push(left[i]);
     i++;
   }
@@ -37,4 +40,4 @@ function mergeSort(left, right) {
   return result;
 }
 
-console.log(merge(arr1));
+console.log(mergeSort(arr1)); //Mergesort works
